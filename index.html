@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+    <title>Truth or Dare</title>
+
+</head>
+<style>
+
+    body{
+    font-family: Arial;
+    background:#222;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    width:600px;
+    text-align:center;
+}
+
+button{
+    padding:12px 25px;
+    margin:10px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+#question{
+    margin-top:30px;
+    padding:20px;
+    background:white;
+    color:black;
+    border-radius:10px;
+    min-height:120px;
+    font-size:22px;
+}
+</style>
+
+<body>
+    <div class="container">
+        <h1>Truth or Dare</h1>
+
+        <button id="truthBtn"> Truth </button>
+
+        <button id="dareBtn"> Dare </button>
+
+        <button id="randomBtn">Random</button>
+
+        <div id="question"> Click a button to start...</div>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>

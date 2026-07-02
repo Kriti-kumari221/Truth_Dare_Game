@@ -6,7 +6,7 @@ let truthbtn=document.getElementById('truthBtn') as HTMLButtonElement
 let darebtn=document.getElementById('dareBtn') as HTMLButtonElement
 let randombtn=document.getElementById('randomBtn') as HTMLButtonElement
 let question_field=document.getElementById('question') as HTMLDivElement
-
+let timerField= document.getElementById("timer") as HTMLDivElement;
 type Mode="truth"|"dare";
 
 let question:Questions;
@@ -21,13 +21,33 @@ function random(arr:string[])
 }
 function show(mode:Mode){
     if(mode==="truth"){
-question_field.innerHTML=`<h3>Truth</h3>
+question_field.innerHTML=
+`<h3>Truth</h3>
 <p>${random(question.truth)}</p>`      
     }
     if(mode==="dare"){
         question_field.innerHTML=`<h3>Dare</h3>
 <p>${random(question.dare)}</p>`
-    }   
+    }
+    startTimer(30);  
+}
+let interval:number;
+function startTimer(seconds:number){
+    truthbtn.disabled=true;
+    darebtn.disabled=true;
+    randombtn.disabled=true;
+    timerField.innerHTML=`Time Left: ${seconds}`;
+    interval=window.setInterval(()=>{
+        seconds--;
+        timerField.innerHTML=`Time Left: ${seconds}`;
+        if(seconds<=0){
+            clearInterval(interval);
+            timerField.innerHTML=`Time's Up!`;
+            truthbtn.disabled=false;
+            darebtn.disabled=false;
+            randombtn.disabled=false;
+        }
+    },1000);
 }
 truthbtn.addEventListener("click",()=>{
     show("truth")

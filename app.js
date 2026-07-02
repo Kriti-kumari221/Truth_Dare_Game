@@ -2,6 +2,7 @@ let truthbtn = document.getElementById('truthBtn');
 let darebtn = document.getElementById('dareBtn');
 let randombtn = document.getElementById('randomBtn');
 let question_field = document.getElementById('question');
+let timerField = document.getElementById("timer");
 let question;
 async function load() {
     const response = await fetch("questions.json");
@@ -13,13 +14,33 @@ function random(arr) {
 }
 function show(mode) {
     if (mode === "truth") {
-        question_field.innerHTML = `<h3>Truth</h3>
+        question_field.innerHTML =
+            `<h3>Truth</h3>
 <p>${random(question.truth)}</p>`;
     }
     if (mode === "dare") {
         question_field.innerHTML = `<h3>Dare</h3>
 <p>${random(question.dare)}</p>`;
     }
+    startTimer(30);
+}
+let interval;
+function startTimer(seconds) {
+    truthbtn.disabled = true;
+    darebtn.disabled = true;
+    randombtn.disabled = true;
+    timerField.innerHTML = `Time Left: ${seconds}`;
+    interval = window.setInterval(() => {
+        seconds--;
+        timerField.innerHTML = `Time Left: ${seconds}`;
+        if (seconds <= 0) {
+            clearInterval(interval);
+            timerField.innerHTML = `Time's Up!`;
+            truthbtn.disabled = false;
+            darebtn.disabled = false;
+            randombtn.disabled = false;
+        }
+    }, 1000);
 }
 truthbtn.addEventListener("click", () => {
     show("truth");
